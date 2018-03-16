@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :sushi
+  belongs_to :organization
   validates :name, presence: true
   validates :uid, presence: true
   validates :provider, presence: true
