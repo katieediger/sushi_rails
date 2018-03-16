@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316175307) do
+ActiveRecord::Schema.define(version: 20180316192851) do
 
   create_table "data", force: :cascade do |t|
     t.string "date"
     t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "organization_id"
+    t.integer "sushi_id"
+    t.index ["organization_id"], name: "index_data_on_organization_id"
+    t.index ["sushi_id"], name: "index_data_on_sushi_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -38,6 +42,8 @@ ActiveRecord::Schema.define(version: 20180316175307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "organization_id"
+    t.index ["organization_id"], name: "index_sushis_on_organization_id"
     t.index ["user_id"], name: "index_sushis_on_user_id"
   end
 
@@ -50,6 +56,8 @@ ActiveRecord::Schema.define(version: 20180316175307) do
     t.string "uid"
     t.string "location"
     t.string "image_url"
+    t.integer "organization_id"
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["uid"], name: "index_users_on_uid"
