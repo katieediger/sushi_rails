@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       session[:user_id] = @user.id
+      #session[:organization_id] = @user.organization_id
       flash[:success] = "Welcome, #{@user.name}"
       redirect_to root_path
     rescue
