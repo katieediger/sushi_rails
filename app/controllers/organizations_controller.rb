@@ -4,6 +4,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
+    @organization = Organization.all
   end
 
   # GET /organizations/1
@@ -24,15 +25,13 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-
-    respond_to do |format|
-      if @organization.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
-      else
-        format.html { render :new }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
-      end
+    if @organization.save
+      user = current_user
+      user.update(organization_id: @organization.id)
+      redirect_to('/organizations')
+    else
+      flash[:danger] = "Error: #{@organization.errors.full_message(@organization.name, 'already exists')}"
+      redirect_to ('/organizations/new')
     end
   end
 
