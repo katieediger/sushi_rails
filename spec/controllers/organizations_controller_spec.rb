@@ -21,7 +21,10 @@ RSpec.describe "Organization controller" do
     it "updates the user table when a user joins or creates an organization" do
 
     end
-    it "can join an existing organization after logging in with OAuth" do
+    it "can join an existing organization after logging in and entering correct password" do
+      #Organization.create!(name: "IIT", password_digest: "test", email: "test@example.com")
+    end
+    it "can not join an existing organization without the correct password" do
       #Organization.create!(name: "IIT", password_digest: "test", email: "test@example.com")
     end
     it "can edit name of an existing organization if part of that organization" do
@@ -29,6 +32,9 @@ RSpec.describe "Organization controller" do
     end
     it "can not edit name of an existing organization if not part of that organization" do
 
+    end
+    it "can not view an organization's details unless user enters the correct password" do
+      
     end
     it "can list all users for the current organization" do
 
