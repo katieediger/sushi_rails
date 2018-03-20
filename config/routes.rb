@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get ':id/call', to: 'sushi#call'
     end
   end
+  resources :organization
+  resources :datum 
   resources :user
   resources :about
   root to: 'about#index'
