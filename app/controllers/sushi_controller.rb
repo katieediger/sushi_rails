@@ -100,6 +100,6 @@ class SushiController < ApplicationController
   end
 
   def sushi_params
-    params.require(:sushi).permit(:name, :endpoint, :cust_id, :req_id, :report_start, :report_end, :password, :user_id)
+    params.require(:sushi).permit(:name, :endpoint, :cust_id, :req_id, :report_start, :report_end, :password, :organization_id)
   end
 end
