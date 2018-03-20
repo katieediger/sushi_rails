@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :organization
+  belongs_to :organization, optional: true
   validates :name, presence: true
   validates :uid, presence: true
   validates :provider, presence: true
