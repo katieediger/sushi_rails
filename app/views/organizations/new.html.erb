@@ -1,0 +1,21 @@
+<div class="row">
+<h3> Create New Organization </h3>
+</div>
+  <%= form_for @organization, url: {action: "create"} do |f| %>
+  <div class='form-group'>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: "form-control", autofocus: true, required: true %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password, "Password" %>
+    <%= f.text_field :password_digest, class: "form-control", required: true %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email, class: "form-control", required: true%>
+  </div>
+  <div class='form-group'>
+  <!--  <%= f.hidden_field :user_id, :value => current_user.id %>-->
+    <%= f.submit "Create", class: 'btn btn-primary' %>
+  </div>
+<% end %>
