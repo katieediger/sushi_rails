@@ -10,13 +10,12 @@ RSpec.describe "Organization controller" do
     include ApplicationHelper
     it "can create a new organization after logging in with OAuth" do
       sign_in
-      visit("/organization")
+      visit("/organizations")
       click_link "New Organization"
-      fill_in "Name", with: 'IIT'
-      fill_in "Password", with: 'test'
+      fill_in "Name", with: 'test'
+      fill_in "Password Digest", with: 'test'
       fill_in "Email", with: 'test@example.com'
       click_button('Create')
-      save_and_open_page
       expect(page).to have_content('test')
     end
     it "updates the user table when a user joins or creates an organization" do
