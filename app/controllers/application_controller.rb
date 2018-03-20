@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+  def current_organization
+    @org_id = current_user.organization_id
+  end
 
+  helper_method :current_organization
   helper_method :current_user
 end
