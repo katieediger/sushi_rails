@@ -3,7 +3,7 @@ module ApplicationHelper
     @current_user ||= User.find_by(session[:user_id])
   end
   def current_organization
-    @org_id = current_user.organization_id
+    @current_organization = current_user.organization
   end
   def mock_auth_hash
    # The mock_auth configuration allows you to set per-provider (or default)
