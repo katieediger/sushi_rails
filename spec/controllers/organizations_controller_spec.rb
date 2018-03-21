@@ -71,7 +71,16 @@ RSpec.describe "Organization controller" do
 
     end
     it "can list all users for the current organization" do
-
+      sign_in
+      Organization.create!(id: 100, name: "IIT", password_digest: "test", email: "test@example.com")
+      User.create!(id: 100, name: "Max", uid: 100, provider: "google", organization_id: 100)
+      User.create!(id: 101, name: "Joe", uid: 101, provider: "google", organization_id: 100)
+      current_user.update(organization_id: 100)
+      visit("/user")
+      click_link("IIT")
+      expect(page).to have_content("Joe")
+      expect(page).to have_content("Max")
+      expect(page).to have_content("mockuser")
     end
     it "can recover Organization password through email" do
 
