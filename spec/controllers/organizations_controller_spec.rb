@@ -58,7 +58,14 @@ RSpec.describe "Organization controller" do
       expect(page).to have_content('hello')
     end
     it "can not edit name of an existing organization if not part of that organization" do
-
+      sign_in
+      Organization.create!(id: 100, name: "IIT", password_digest: "test", email: "test@example.com")
+      Organization.create!(id: 101, name: "max", password_digest: "test", email: "test@example.com")
+      current_user.update(organization_id: 101)
+      visit("/user")
+      expect(page).to_not have_content('IIT')
+      visit("/organizations/100/edit")
+      expect(page).to have_content("That's not your organization")
     end
     it "can not view an organization's details unless user enters the correct password" do
 
