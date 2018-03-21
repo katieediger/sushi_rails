@@ -57,7 +57,6 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'warden'
   gem 'warden-rspec-rails'
-  gem 'selenium-webdriver'
   gem 'rack_session_access'
   gem 'launchy'
   gem 'peek'
