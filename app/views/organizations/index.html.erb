@@ -20,7 +20,7 @@
     <p><%= o.name %></p>
   </div>
   <div class="col-lg-5">
-    <p><%= link_to 'Edit Organization', edit_organization_path(o.id), class: 'btn btn-primary' %></p>
+    <p><%= link_to 'Join', {:controller => :organizations, :action => :join, :id => (o.id)}, class: 'btn btn-primary' %></p>
   </div>
 </div>
 <% end %>
