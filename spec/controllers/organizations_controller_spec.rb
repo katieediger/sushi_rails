@@ -22,7 +22,6 @@ RSpec.describe "Organization controller" do
     it "updates the user table when a user joins an organization" do
       sign_in
       visit("/organizations")
-      save_and_open_page
       click_link "Join"
       fill_in "Password Digest", with: "test"
       click_link "Confirm"
@@ -30,7 +29,16 @@ RSpec.describe "Organization controller" do
       expect(page).to have_content("test")
     end
     it "updates the user table when a user creates an organization" do
-
+      sign_in
+      visit("/user")
+      expect(page).not_to have_content('test')
+      visit("/organizations")
+      click_link "New Organization"
+      fill_in "Name", with: "test"
+      fill_in "Password Digest", with: "test"
+      fill_in "Email", with: "test@example.com"
+      click_button('Create')
+      expect(page).to have_content('test')
     end
     it "can join an existing organization after logging in and entering correct password" do
       #Organization.create!(name: "IIT", password_digest: "test", email: "test@example.com")
