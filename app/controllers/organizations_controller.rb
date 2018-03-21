@@ -10,6 +10,13 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    @organization = Organization.find(params[:id])
+    @users = User.where(organization_id: current_organization.id)
+    unless current_organization.id == @organization.id
+      flash[:danger] = "That's not your organization"
+      redirect_to root_path
+      return
+    end
   end
 
   # GET /organizations/new

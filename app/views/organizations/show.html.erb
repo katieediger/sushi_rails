@@ -1,0 +1,12 @@
+<div class="row">
+  <h3> Organization Members </h3>
+</div>
+
+  <% @users.each do |u| %>
+  <div class="row data">
+    <div class="col-lg-5">
+      <p><%= u.name %></p>
+    </div>
+    </div>
+  </div>
+<% end %>
