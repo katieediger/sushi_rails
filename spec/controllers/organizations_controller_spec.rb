@@ -37,7 +37,7 @@ RSpec.describe "Organization controller" do
       fill_in "Name", with: "test"
       fill_in "Password Digest", with: "test"
       fill_in "Email", with: "test@example.com"
-      click_button('Create')
+      click_button("Create")
       expect(page).to have_content('test')
     end
     it "can join an existing organization after logging in and entering correct password" do
@@ -47,7 +47,15 @@ RSpec.describe "Organization controller" do
       #Organization.create!(name: "IIT", password_digest: "test", email: "test@example.com")
     end
     it "can edit name of an existing organization if part of that organization" do
-
+      sign_in
+      Organization.create!(id: 100, name: "IIT", password_digest: "test", email: "test@example.com")
+      current_user.update(organization_id: 100)
+      visit("/user")
+      expect(page).to have_content('IIT')
+      click_link("Edit Organization")
+      fill_in "Name", with: "hello"
+      click_button("Update")
+      expect(page).to have_content('hello')
     end
     it "can not edit name of an existing organization if not part of that organization" do
 
