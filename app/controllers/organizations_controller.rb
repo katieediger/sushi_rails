@@ -21,6 +21,26 @@ class OrganizationsController < ApplicationController
   def edit
   end
 
+  def join
+    @organization = Organization.find(params[:id])
+  end
+
+  def confirm
+    @organization = Organization.find(params[:id])
+    if current_user.organization_id != nil
+      redirect_to('/user')
+      flash[:danger] = "Error: You are already a member of an organization"
+    elsif
+      organization_params[:password] != @organization.password_digest
+      redirect_to('/user')
+      flash[:danger] = "Wrong password"
+    else
+      current_user.update(organization_id: @organization.id)
+      redirect_to('/user')
+      flash[:danger] = "Okay!"
+    end
+  end
+
   # POST /organizations
   # POST /organizations.json
   def create
@@ -67,6 +87,6 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params.require(:organization).permit(:name, :email, :password_digest)
+      params.require(:organization).permit(:name, :email, :password_digest, :password)
     end
 end
