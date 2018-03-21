@@ -23,5 +23,8 @@
   </div>
   <div class="col-lg-3">
     <p><%= link_to 'Edit Profile', edit_user_path(current_user.id), class: 'btn btn-primary' %></p>
+    <% if current_organization %>
+      <p><%= link_to 'Edit Organization', edit_organization_path(current_organization.id), class: 'btn btn-primary' %></p>
+    <% end %>
   </div>
 </div>

@@ -19,6 +19,12 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
+    @organization = Organization.find(params[:id])
+    unless current_organization.id == @organization.id
+      flash[:danger] = "That's not your organization"
+      redirect_to root_path
+      return
+    end
   end
 
   def join
@@ -60,7 +66,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to ("/user"), notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }

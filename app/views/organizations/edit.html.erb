@@ -1,1 +1,21 @@
+<div class="row">
+  <h3> Edit Organization </h3>
+</div>
 
+  <%= form_for (@organization) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, class: "form-control", autofocus: true, required: true %>
+    </div>
+    <div class='form-group'>
+      <%= f.label :password_digest, "Password Digest" %>
+      <%= f.text_field :password_digest, class: "form-control"%>
+    </div>
+    <div class='form-group'>
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email, class: "form-control"%>
+    </div>
+    <div class='form-group'>
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+    </div>
+<% end %>
