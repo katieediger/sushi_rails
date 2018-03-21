@@ -5,6 +5,7 @@ RSpec.describe "Organization controller" do
     visit '/'
     mock_auth_hash
     click_link "Login"
+    Organization.create!(name: "test", password_digest: "test", email: "test@example.com")
   end
   describe "Organization Features", :type => :feature do
     include ApplicationHelper
@@ -12,13 +13,23 @@ RSpec.describe "Organization controller" do
       sign_in
       visit("/organizations")
       click_link "New Organization"
-      fill_in "Name", with: 'test'
-      fill_in "Password Digest", with: 'test'
-      fill_in "Email", with: 'test@example.com'
+      fill_in "Name", with: "test"
+      fill_in "Password Digest", with: "test"
+      fill_in "Email", with: "test@example.com"
       click_button('Create')
       expect(page).to have_content('test')
     end
-    it "updates the user table when a user joins or creates an organization" do
+    it "updates the user table when a user joins an organization" do
+      sign_in
+      visit("/organizations")
+      save_and_open_page
+      click_link "Join"
+      fill_in "Password Digest", with: "test"
+      click_link "Confirm"
+      visit("/user")
+      expect(page).to have_content("test")
+    end
+    it "updates the user table when a user creates an organization" do
 
     end
     it "can join an existing organization after logging in and entering correct password" do
@@ -34,7 +45,7 @@ RSpec.describe "Organization controller" do
 
     end
     it "can not view an organization's details unless user enters the correct password" do
-      
+
     end
     it "can list all users for the current organization" do
 
@@ -43,6 +54,9 @@ RSpec.describe "Organization controller" do
 
     end
     it "can encrypt Organization password with bcrypt" do
+
+    end
+    it "can leave Organizations successfully" do
 
     end
   end
