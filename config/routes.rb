@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       get ':id/call', to: 'sushi#call'
     end
   end
-  resources :organizations
+  resources :organizations do
+    collection do
+      get ':id/join', to: 'organizations#join'
+      get ':id/confirm', to: 'organizations#confirm'
+    end
+  end
   resources :datum
   resources :user
   resources :about
